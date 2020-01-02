@@ -2,7 +2,7 @@
 <html lang="ko">
     <head>
         <meta charset="utf-8">
-        <title>산책모임 | 반 려 견 동 반 카 페</title>
+        <title>글쓰기_방문후기 | 반 려 견 동 반 카 페</title>
         <style>
             * {
                 padding: 0;
@@ -14,6 +14,9 @@
             h1 {
                 font-family: "둥근모꼴";
             }
+            th, td {
+                padding: 10px;
+            }
             body {
                 font-family: "맑은고딕";
                 margin: 0;
@@ -21,6 +24,14 @@
                 background-repeat: no-repeat;
                 background-position: center;
                 background-attachment: fixed;
+            }
+            input {
+                font-family : "맑은고딕";
+                font-size : 14px;
+            }
+            textarea {
+                font-family : "맑은고딕";
+                font-size : 12px;
             }
             #wrap {
                 width: 1280px;
@@ -64,13 +75,14 @@
                 border-bottom: 1px solid #cccccc;
                 text-align: center;
             }
-            #mapView {
-                width: 1280px;
-                height: 480px;
+            #contents {
+                margin : 20px 0;
             }
-            #mapSearch {
-                width: 1280px;
-                height: 480px;
+            .title {
+                width : 740px;
+                float : left;
+                font-size : 36px;
+                margin : 80px 0;
             }
             #footer {
                 text-align: center;
@@ -84,41 +96,6 @@
                 font-size: 8px;
             }
         </style>
-        <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ow0fcpdiv4"></script>
-        <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ow0fcpdiv4&callback=initMap"></script>
-        <script>
-            var mapOptions = {
-                center : new naver.maps.LatLng(37.827686, 127.137600),
-                zoom : 10,
-                minZoom : 1,
-                zoomControl : true,
-                zoomControlOptions : {
-                    position : naver.maps.Position.LEFT_BOTTOM
-                }
-            }
-            var map, marker;
-            function initMap() {
-                map = new naver.maps.Map('mapView', mapOptions);
-                marker = new naver.maps.Marker({
-                    position: new naver.maps.LatLng(37.827686, 127.137600),
-                    map: map,
-                    icon: {
-                        content: '<img src="image/marker.png"/>',
-                        size: new naver.maps.Size(70, 74),
-                        anchor: new naver.maps.Point(25, 86)
-                    }
-                });
-            }
-        </script>
-        <script>
-            $(document).ready(function() {
-                curl "https://naveropenapi.apigw.ntruss.com/map-place/v1/search?query=%EA%B7%B8%EB%A6%B0%ED%8C%A9%ED%86%A0%EB%A6%AC&coordinate=127.1054328,37.3595963" \
-                    -H "X-NCP-APIGW-API-KEY-ID: {ow0fcpdiv4}" \
-                        -H "X-NCP-APIGW-API-KEY: {dmhX6cUUquQrCUpdDvv6xHNfaEuJvUTCFrqfKNSn}" -v
-                var mapSearch = new.naver.maps.search('%EA%B7%B8%EB%A6%B0%ED%8C%A9%ED%86%A0%EB%A6%AC');
-                mapSearch = naver.maps.Map('mapSearch');
-            });
-        </script>
     </head>
     <body>
         <div id="wrap">
@@ -141,12 +118,23 @@
             </header>
             <section id="main">
                 <div id="mainTitle">
-                    <h1 class="titleText">산책모임</h1>
+                    <h1 class="titleText">글쓰기</h1>
                 </div>
                 <div id="contents">
-                    <div id="mapView"></div>
-                    <p class="texts">하단에서 원하시는 위치를 검색하여 모임에 참여해보세요!</p>
-                    <div id="mapSearch"></div>
+                    <form>
+                        <label for="username">이　름</label>
+                        <input id="username" type="text" />
+                        <label for="mail">비밀번호</label>
+                        <input id="mail" type="password" name="pass" /><br/><br/>
+                        <label for="title">제　목</label><br />
+                        <textarea name="title" rows="1" cols="90"></textarea><br/><br/>
+                        <label for="letter">내　용</label><br/>
+                        <textarea name="letter" rows="15" cols="120"></textarea><br/><br/>
+                        <label for="file">파일 첨부</label>
+                        <input id="file" type="file" /><br/><br/>
+                        <input type="hidden" name="hidden" value="hidden" />
+                        <input id="button" type="button" value=" 글쓰기 " onclick = "location.href = '05_review.html'" />
+                    </form>
                 </div>            
             </section>
             <footer id="footer">
